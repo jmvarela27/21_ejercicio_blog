@@ -1,23 +1,23 @@
-const { Article } = require("../models");
+// const { Article } = require("../models");
 
-async function showHome(req, res) {
-  const articles = await Article.findAll();
-  res.render("home", { articles });
-}
+// async function showHome(req, res) {
+//   const articles = await Article.findAll();
+//   res.render("home", { articles });
+// }
 
-async function showContact(req, res) {
-  res.render("contact");
-}
+// async function showContact(req, res) {
+//   res.render("contact");
+// }
 
-async function showAboutUs(req, res) {
-  res.render("aboutUs");
-}
+// async function showAboutUs(req, res) {
+//   res.render("aboutUs");
+// }
 
-// Otros handlers...
-// ...
+// // Otros handlers...
+// // ...
 
-module.exports = {
-  showHome,
-  showContact,
-  showAboutUs,
-};
+// module.exports = {
+//   showHome,
+//   showContact,
+//   showAboutUs,
+// };

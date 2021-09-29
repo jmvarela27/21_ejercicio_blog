@@ -1,7 +1,11 @@
 const { User } = require("../models");
+// const Article = require("../models/index");
 
 // Display a listing of the resource.
 async function index(req, res) {
+  Article.findAll().then((articles) => {
+    console.log(articles);
+  });
   res.render("home");
 }
 
