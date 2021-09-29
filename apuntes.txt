@@ -1,0 +1,28 @@
+/home       GET   listado total de artículos, ordenados por fecha de creación
+
+/home/:id   GET   detalles del artículo con esa id
+                  título, contenido, imagen, fecha de creación, autor, lista de comentarios (se pueden hacer comentarios en esta página)
+
+/api/articulos
+
+/admin/articulos                GET Se podrá crear, modificar y eliminar artículos. vista de artículos
+/admin/articulos/crear          GET vista de creación de artículo
+/admin/articulos/editar/:id     GET vista de edición de artículo
+/admin/articulos                POST agregar artículo
+/admin/articulos/editar/:id     POST editar artículo
+/admin/articulos/eliminar/:id   GET eliminar artículo
+
+---
+
+## DB
+
+articulos PK id
+
+id | título | contenido | imagen | fechaCreación | autor
+
+---
+
+comentarios PK id FK id_articulo references articulos(id)
+
+id | contenido | id_articulo
+
