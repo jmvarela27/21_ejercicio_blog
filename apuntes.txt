@@ -16,9 +16,9 @@
 
 ## DB
 
-articulos PK id
+articulos PK id     FK author_id references author(id)
 
-id | título | contenido | imagen | fechaCreación | autor
+id | título | contenido | imagen | fechaCreación | author_id
 
 ---
 
@@ -26,3 +26,8 @@ comentarios PK id FK id_articulo references articulos(id)
 
 id | contenido | id_articulo
 
+---
+
+author  PK id
+
+id  |   nombre  |   apellido  |   mail
