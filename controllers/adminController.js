@@ -1,5 +1,9 @@
+// const { User } = require("../models");
+
 // Display a listing of the resource.
-async function index(req, res) {}
+async function index(req, res) {
+  res.render("adminHome");
+}
 
 // Display the specified resource.
 async function show(req, res) {}
@@ -22,6 +26,9 @@ async function destroy(req, res) {}
 // Otros handlers...
 // ...
 
+// Return json
+async function apiCreation(req, res) {}
+
 module.exports = {
   index,
   show,
@@ -30,4 +37,5 @@ module.exports = {
   edit,
   update,
   destroy,
+  apiCreation,
 };
