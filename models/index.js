@@ -11,22 +11,22 @@ const sequelize = new Sequelize(
   },
 );
 
-const Author = require("./Author")(sequelize, Model, DataTypes);
+const User = require("./User")(sequelize, Model, DataTypes);
 const Comment = require("./Comment")(sequelize, Model, DataTypes);
 const Article = require("./Article")(sequelize, Model, DataTypes);
 
 // Luego de definir los modelos, se pueden establecer relaciones
 // entre los mismos...
 
-Author.hasMany(Article);
-Article.belongsTo(Author);
+User.hasMany(Article);
+Article.belongsTo(User);
 
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
 
 module.exports = {
   sequelize,
-  Author,
+  User,
   Comment,
   Article,
 };
