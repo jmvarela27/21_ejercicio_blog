@@ -11,7 +11,7 @@ function clickEliminar(id) {
   document.getElementById(
     "modal-msg",
   ).textContent = `Seguro quiere eliminar el usuario con ID ${id}`;
-  document.getElementById("aceptar-modal").href = `/usuarios/eliminar/${id}`;
+  document.getElementById("aceptar-modal").href = `/admin/articulos/eliminar/${id}`;
 
   document.getElementById("dark-background").classList.add("show");
   document.getElementById("modal-box").classList.add("show");

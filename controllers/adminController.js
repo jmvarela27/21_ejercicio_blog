@@ -44,11 +44,24 @@ async function edit(req, res) {
 
 // Update the specified resource in storage.
 async function update(req, res) {
-  res.send("entré al update");
+  const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
+  const response = await Article.update(articulo, {
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.redirect("/admin/articulos");
 }
 
 // Remove the specified resource from storage.
-async function destroy(req, res) {}
+async function destroy(req, res) {
+  const response = await Article.destroy({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.redirect("/admin/articulos");
+}
 
 // Display the specified resource.
 async function show(req, res) {}

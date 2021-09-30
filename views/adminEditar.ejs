@@ -50,10 +50,13 @@
           <div class="input-group mb-3">
             <label class="input-group-text" for="autor">Opciones de Autores</label>
             <select class="form-select" name="autor" id="autor">
-              <option selected><%= users.firstname + " " + users.lastname %></option>
-              <% for(const user of users) { %>
+              <% for(const user of users) { %> <% if(articulo.user.id === user.id) {%>
+              <option selected value="<%= user.id %> ">
+                <%= user.firstname + " " + user.lastname %>
+              </option>
+              <%} else {%>
               <option value="<%= user.id %> "><%= user.firstname + " " + user.lastname %></option>
-              <% } %>
+              <% } %> <% } %>
             </select>
           </div>
           <div>
