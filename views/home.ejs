@@ -12,11 +12,11 @@
           <div class="post-preview">
             <a href="post.html">
               <h2 class="post-title"><%= articulo.title %></h2>
-              <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+              <h3 class="post-subtitle"><%= articulo.content.substring(0,50) %></h3>
             </a>
             <p class="post-meta">
               Posted by
-              <a href="#!">Start Bootstrap</a>
+              <a href="#!"><%= articulo.userId %> </a>
               on September 24, 2021
             </p>
           </div>

@@ -9,9 +9,6 @@ module.exports = async () => {
   const users = [];
 
   for (let i = 0; i < 10; i++) {
-    authors.push({
-      firstname: faker.name.title(1),
-      lastname: faker.name.title(1),
     users.push({
       firstname: faker.name.title(1),
       lastname: faker.name.title(1),
@@ -20,12 +17,14 @@ module.exports = async () => {
   }
   const aux = await User.bulkCreate(users);
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 1; i < 11; i++) {
     articles.push({
       title: faker.company.catchPhrase(5),
       content: faker.lorem.paragraphs(),
+      userId: (i % 5) + 1,
     });
   }
+
   await Article.bulkCreate(articles);
   console.log("[Database] Se corrió el seeder de Articles.");
 };
