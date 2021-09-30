@@ -52,10 +52,16 @@
               placeholder="Ingrese contenido..."
             ></textarea>
           </div>
-          <div>
-            <label for="autor">Autor</label>
-            <input type="text" id="autor" name="autor" placeholder="Ingrese nombre y apellido..." />
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="autor">Opciones de Autores</label>
+            <select class="form-select" name="autor" id="autor">
+              <option selected>Elegir...</option>
+              <% for(const user of users) { %>
+              <option value="<%= user.id %> "><%= user.firstname + " " + user.lastname %></option>
+              <% } %>
+            </select>
           </div>
+
           <div>
             <button type="submit" class="btn">Guardar</button>
           </div>

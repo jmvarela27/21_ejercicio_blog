@@ -13,22 +13,24 @@ async function index(req, res) {
   res.render("adminHome", { articulos });
 }
 
-// Display the specified resource.
-async function show(req, res) {}
+// Store a newly created resource in storage.
+async function store(req, res) {
+  const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
+  const response = await Article.create(articulo);
+  res.redirect("/admin/articulos");
+}
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  res.render("adminCrear");
-}
+  const users = await User.findAll();
 
-// Store a newly created resource in storage.
-async function store(req, res) {
-  res.send("entré al crear");
+  res.render("adminCrear", { users });
 }
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
   const id = req.params.id;
+  const users = await User.findAll();
   const articulo = await Article.findByPk(id, {
     include: [
       {
@@ -37,7 +39,7 @@ async function edit(req, res) {
       },
     ],
   });
-  res.render("adminEditar", { articulo });
+  res.render("adminEditar", { articulo, users });
 }
 
 // Update the specified resource in storage.
@@ -47,6 +49,9 @@ async function update(req, res) {
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {}
+
+// Display the specified resource.
+async function show(req, res) {}
 
 // Otros handlers...
 // ...

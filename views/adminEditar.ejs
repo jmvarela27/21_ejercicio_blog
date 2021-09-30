@@ -47,10 +47,14 @@
             <label for="contenido">Contenido</label>
             <textarea name="contenido" id="contenido" rows="10"><%= articulo.content %></textarea>
           </div>
-          <div>
-            <label for="autor">Autor</label>
-            <input type="text" id="autor" name="autor" value="<%= articulo.user.firstname + " " +
-            articulo.user.lastname %>" />
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="autor">Opciones de Autores</label>
+            <select class="form-select" name="autor" id="autor">
+              <option selected><%= users.firstname + " " + users.lastname %></option>
+              <% for(const user of users) { %>
+              <option value="<%= user.id %> "><%= user.firstname + " " + user.lastname %></option>
+              <% } %>
+            </select>
           </div>
           <div>
             <button type="submit" class="btn">Guardar</button>
