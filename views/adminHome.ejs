@@ -2,48 +2,60 @@
 <html lang="en">
   <%- include("partials/meta") %>
   <body>
-    <%- include("partials/navbar") %>
-    <!-- Page Header-->
-    <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
-      <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <div class="site-heading">
-              <h1>Clean Blog</h1>
-              <span class="subheading">A Blog Theme by Start Bootstrap</span>
-            </div>
-          </div>
+    <div id="contenido-sin-modal">
+      <div class="content">
+        <div class="header">
+          <h1>Listado de Artículos</h1>
+          <a href="/admin/articulos/crear" class="btn btn-nuevo">Nuevo</a>
         </div>
-      </div>
-    </header>
-    <!-- Main Content-->
-    <div class="container px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-          <!-- Post preview-->
-          <% for (const articulo of articulos) { %>
-          <div class="post-preview">
-            <a href="<%= articulo.id %> ">
-              <h2 class="post-title"><%= articulo.title %></h2>
-              <h3 class="post-subtitle"><%= articulo.content.substring(0,50) %></h3>
-            </a>
-            <p class="post-meta">
-              Posted by
-              <a href="#!"><%= articulo.user.firstname + " " + articulo.user.lastname %> </a>
-              <%= articulo.createdAt.toDateString() %>
-            </p>
-          </div>
-          <!-- Divider-->
-          <hr class="my-4" />
-          <% } %>
-
-          <!-- Pager-->
-          <div class="d-flex justify-content-end mb-4">
-            <a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-          </div>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Título</th>
+                <th>Contenido</th>
+                <th>Fecha de creación</th>
+                <th>Autor</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const articulo of articulos) { %>
+              <tr>
+                <td><%= articulo.id %></td>
+                <td><%= articulo.title %></td>
+                <td><%= articulo.content %></td>
+                <td><%= articulo.createdAt.toDateString() %></td>
+                <td><%= articulo.user.firstname + " " + articulo.user.lastname %></td>
+                <td class="td-acciones">
+                  <a href="/admin/articulos/editar/<%= articulo.id %>" class="btn btn-editar"
+                    >Editar</a
+                  >
+                  <button
+                    type="submit"
+                    id="btn-eliminar"
+                    class="btn-eliminar btn"
+                    onclick="clickEliminar('<%= articulo.id %>')"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+
+    <div id="dark-background"></div>
+    <div id="modal-box">
+      <p id="modal-msg"></p>
+      <button id="cancelar-modal" class="btn">Cancelar</button>
+      <a href="" id="aceptar-modal" class="btn">Eliminar</a>
+    </div>
+
     <%- include("partials/footer") %>
   </body>
 </html>
