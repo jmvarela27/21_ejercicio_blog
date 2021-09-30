@@ -1,10 +1,14 @@
-// const { Article } = require("../models");
+const { Article } = require("../models");
 
-// async function showHome(req, res) {
-//   const articles = await Article.findAll();
-//   res.render("home", { articles });
-// }
+async function showHome(req, res) {
+  const articulos = await Article.findAll();
+  res.render("home", { articulos });
+}
 
+async function showOne(req, res) {
+  const articulo = await Article.findByPk(req.params.id);
+  res.render("articulo", { articulo });
+}
 // async function showContact(req, res) {
 //   res.render("contact");
 // }
@@ -13,11 +17,12 @@
 //   res.render("aboutUs");
 // }
 
-// // Otros handlers...
-// // ...
+// Otros handlers...
+// ...
 
-// module.exports = {
-//   showHome,
-//   showContact,
-//   showAboutUs,
-// };
+module.exports = {
+  showHome,
+  showOne,
+  // showContact,
+  // showAboutUs,
+};

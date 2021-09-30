@@ -1,7 +1,7 @@
 module.exports = (sequelize, Model, DataTypes) => {
-  class Author extends Model {}
+  class User extends Model {}
 
-  Author.init(
+  User.init(
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
@@ -20,9 +20,9 @@ module.exports = (sequelize, Model, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "author",
+      modelName: "user",
     },
   );
 
-  return Author;
+  return User;
 };

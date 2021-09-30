@@ -1,11 +1,11 @@
 const express = require("express");
 const publicRouter = express.Router();
-const publicController = require("../controllers/publicController");
+const pagesController = require("../controllers/pagesController");
 
 // Rutas del Públicas:
 // ...
-publicRouter.get("/", publicController.index);
+publicRouter.get("/", pagesController.showHome);
 
-publicRouter.get("/:id", publicController.show);
+publicRouter.get("/:id", pagesController.showOne);
 
 module.exports = publicRouter;
