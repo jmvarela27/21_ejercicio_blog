@@ -10,9 +10,9 @@ module.exports = async () => {
 
   for (let i = 0; i < 10; i++) {
     users.push({
-      firstname: faker.name.title(1),
-      lastname: faker.name.title(1),
-      email: faker.name.title(1),
+      firstname: faker.lorem.sentence(1),
+      lastname: faker.lorem.sentence(1),
+      email: faker.lorem.sentence(1),
     });
   }
   const aux = await User.bulkCreate(users);

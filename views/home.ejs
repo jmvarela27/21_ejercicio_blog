@@ -16,8 +16,8 @@
             </a>
             <p class="post-meta">
               Posted by
-              <a href="#!"><%= articulo.userId %> </a>
-              on September 24, 2021
+              <a href="#!"><%= articulo.user.firstname + " " + articulo.user.lastname %> </a>
+              <%= articulo.createdAt.toDateString() %>
             </p>
           </div>
           <!-- Divider-->
