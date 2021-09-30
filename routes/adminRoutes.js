@@ -7,15 +7,15 @@ const adminController = require("../controllers/adminController");
 
 adminRouter.get("/articulos", adminController.index);
 
-adminRouter.get("/admin/articulos/crear", adminController.create);
+adminRouter.get("/articulos/crear", adminController.create);
 
-adminRouter.get("/admin/articulos/editar/:id", adminController.edit);
+adminRouter.get("/articulos/editar/:id", adminController.edit);
 
-adminRouter.get("/admin/articulos/eliminar/:id", adminController.destroy);
+adminRouter.get("/articulos/eliminar/:id", adminController.destroy);
 
-adminRouter.post("/admin/articulos", adminController.store);
+adminRouter.post("/articulos", adminController.store);
 
-adminRouter.post("/admin/articulos/editar/:id", adminController.update);
+adminRouter.post("/articulos/editar/:id", adminController.update);
 
 adminRouter.get("/api/articulos", adminController.apiCreation);
 

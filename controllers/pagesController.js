@@ -13,7 +13,15 @@ async function showHome(req, res) {
 }
 
 async function showOne(req, res) {
-  const articulo = await Article.findByPk(req.params.id);
+  const articulo = await Article.findByPk(req.params.id, {
+    include: [
+      {
+        model: User,
+        required: true,
+      },
+    ],
+  });
+
   res.render("articulo", { articulo });
 }
 // async function showContact(req, res) {
