@@ -1,5 +1,5 @@
 const { id } = require("date-fns/locale");
-const { Article, User } = require("../models");
+const { Article, User, Comment } = require("../models");
 
 async function showHome(req, res) {
   const articulos = await Article.findAll({
@@ -17,19 +17,21 @@ async function showOne(req, res) {
     },
   });
 
-  res.render("articulo", { articulo });
+  const comments = await Comment.findAll({
+    where: { articleId: req.params.id },
+  });
+
+  res.render("articulo", { articulo, comments });
 }
 
-async function getArticlesFromApi(req, res) {
+async function apiCreation(req, res) {
   // const [results, metadata] = await sequelize.query(
   //   "SELECT articles.id, articles.title, articles.content, users.firstname as authorFirstname, users.lastname as authorLastname FROM articles LEFT JOIN users ON articles.userId = users.id",
   // );
 
   const articulos = await Article.findAll({
-    attributes: ["id", "title", "content"],
     include: {
       model: User,
-      attributes: ["id", "firstname", "lastname", "email"],
     },
   });
   res.json(articulos);
@@ -49,7 +51,7 @@ async function getArticlesFromApi(req, res) {
 module.exports = {
   showHome,
   showOne,
-  getArticlesFromApi,
+  apiCreation,
   // showContact,
   // showAboutUs,
 };

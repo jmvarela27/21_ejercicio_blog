@@ -61,12 +61,28 @@
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
-            <p><%= articulo.content %></p>
-            <p><%= articulo.content %></p>
+            <p style="text-align: justify"><%= articulo.content %></p>
+            <p style="text-align: justify"><%= articulo.content %></p>
           </div>
         </div>
       </div>
     </article>
+    <!-- Comments -->
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <h4 class="mt-5">Comentarios</h4>
+          <hr />
+
+          <% for (const comment of comments) {%>
+          <p>Autor: <em><%= comment.authorName %></em></p>
+          <p class="text-secondary"><%= comment.content %></p>
+          <hr />
+          <% } %>
+        </div>
+      </div>
+    </div>
+
     <%- include("partials/footer") %>
   </body>
 </html>

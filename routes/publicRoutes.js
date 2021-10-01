@@ -8,6 +8,6 @@ publicRouter.get("/", pagesController.showHome);
 
 publicRouter.get("/:id", pagesController.showOne);
 
-publicRouter.get("/api/articulos", pagesController.getArticlesFromApi);
+publicRouter.get("/api/articulos", pagesController.apiCreation);
 
 module.exports = publicRouter;

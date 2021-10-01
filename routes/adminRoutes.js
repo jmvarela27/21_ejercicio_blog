@@ -17,6 +17,6 @@ adminRouter.post("/articulos", adminController.store);
 
 adminRouter.post("/articulos/editar/:id", adminController.update);
 
-adminRouter.get("/api/articulos", adminController.apiCreation);
+// adminRouter.get("/api/articulos", adminController.apiCreation);
 
 module.exports = adminRouter;

@@ -10,8 +10,23 @@ async function index(req, res) {
   res.render("adminHome", { articulos });
 }
 
+// Show the form for creating a new resource
+async function create(req, res) {
+  const users = await User.findAll();
+  // const error = { error: "" };
+  res.render("adminCrear", { users });
+}
+
 // Store a newly created resource in storage.
 async function store(req, res) {
+  const users = await User.findAll();
+  // const { title, content, author, image } = req.body;
+  // if (!title || !content || !author) {
+  //   const error = { error: "msg", title: title, content: content, author: author, image: image };
+  //   res.render("adminCrear", { users, error });
+  // } else {
+
+  // }
   const formidable = require("formidable");
   const form = formidable({
     multiples: false,
@@ -31,13 +46,6 @@ async function store(req, res) {
   });
 }
 
-// Show the form for creating a new resource
-async function create(req, res) {
-  const users = await User.findAll();
-
-  res.render("adminCrear", { users });
-}
-
 // Show the form for editing the specified resource.
 async function edit(req, res) {
   const id = req.params.id;
@@ -48,7 +56,7 @@ async function edit(req, res) {
   res.render("adminEditar", { articulo, users });
 }
 
-// Update the specified resource in storage.
+// Update the specified resource in storage. EDITAR
 async function update(req, res) {
   const formidable = require("formidable");
   const form = formidable({
