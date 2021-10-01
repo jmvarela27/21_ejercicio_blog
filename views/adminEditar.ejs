@@ -95,7 +95,7 @@
       </form>
       <a href="/admin/articulos"><i class="bi bi-arrow-left"> </i> Volver</a>
       <% if (typeof error != "undefined") { %>
-      <p><%= error %></p>
+      <p style="color: red" class="mt-3"><%= error.msg %></p>
       <% } %>
     </div>
   </body>

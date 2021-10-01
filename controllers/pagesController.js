@@ -38,13 +38,29 @@ async function apiCreation(req, res) {
 }
 
 async function storeComment(req, res) {
-  const comment = await Comment.create({
-    content: req.body.comment,
-    authorName: req.body.authorName,
-    articleId: req.params.id,
-  });
-  console.log(req.body.id);
-  res.redirect("/" + req.params.id);
+  const { comment, authorName } = req.body;
+  if (comment === "" || authorName === "") {
+    const articulo = await Article.findByPk(req.params.id, {
+      include: {
+        model: User,
+      },
+    });
+
+    const comments = await Comment.findAll({
+      where: { articleId: req.params.id },
+    });
+
+    const error = "Error al enviar comentario. Todos los campos son obligatorios.";
+
+    res.render("articulo", { articulo, comments, error });
+  } else {
+    const response = await Comment.create({
+      content: comment,
+      authorName: authorName,
+      articleId: req.params.id,
+    });
+    res.redirect("/" + req.params.id);
+  }
 }
 
 // async function showContact(req, res) {

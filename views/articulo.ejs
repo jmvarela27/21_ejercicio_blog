@@ -95,8 +95,12 @@
                 placeholder="Ingrese su comentario..."
               ></textarea>
             </div>
+            <% if (typeof error != "undefined") { %>
+            <p style="color: red" class="mt-3"><%= error %></p>
+            <% } %>
             <button class="btn btn-primary">Enviar</button>
           </form>
+
           <hr />
 
           <% for (const comment of comments) {%>

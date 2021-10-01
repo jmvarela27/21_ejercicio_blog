@@ -13,20 +13,14 @@ async function index(req, res) {
 // Show the form for creating a new resource
 async function create(req, res) {
   const users = await User.findAll();
-  // const error = { error: "" };
-  res.render("adminCrear", { users });
+  const error = { msg: "" };
+  res.render("adminCrear", { users, error });
 }
 
 // Store a newly created resource in storage.
 async function store(req, res) {
   const users = await User.findAll();
-  // const { title, content, author, image } = req.body;
-  // if (!title || !content || !author) {
-  //   const error = { error: "msg", title: title, content: content, author: author, image: image };
-  //   res.render("adminCrear", { users, error });
-  // } else {
 
-  // }
   const formidable = require("formidable");
   const form = formidable({
     multiples: false,
@@ -35,14 +29,27 @@ async function store(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    const articulo = {
-      title: fields.titulo,
-      content: fields.contenido,
-      userId: fields.autor,
-      image: path.basename(files.image.path),
-    };
-    const response = await Article.create(articulo);
-    res.redirect("/admin/articulos");
+    const { titulo, contenido, autor } = fields;
+    const image = files.image.path;
+    if (titulo === "" || contenido === "") {
+      const error = {
+        msg: "Error al editar. Los campos título y contenido no pueden estar vacíos",
+        title: titulo,
+        content: contenido,
+        author: autor,
+        image: image,
+      };
+      res.render("adminCrear", { users, error });
+    } else {
+      const articulo = {
+        title: fields.titulo,
+        content: fields.contenido,
+        userId: fields.autor,
+        image: path.basename(files.image.path),
+      };
+      const response = await Article.create(articulo);
+      res.redirect("/admin/articulos");
+    }
   });
 }
 
@@ -59,6 +66,7 @@ async function edit(req, res) {
 // Update the specified resource in storage. EDITAR
 async function update(req, res) {
   const formidable = require("formidable");
+
   const form = formidable({
     multiples: false,
     uploadDir: __dirname + "/../public/img",
@@ -66,18 +74,38 @@ async function update(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    const articulo = {
-      title: fields.titulo,
-      content: fields.contenido,
-      userId: fields.autor,
-      image: path.basename(files.image.path),
-    };
-    const response = await Article.update(articulo, {
-      where: {
+    const { titulo, contenido, autor } = fields;
+    const image = files.image.path;
+    if (titulo === "" || contenido === "") {
+      const articulo = {
         id: req.params.id,
-      },
-    });
-    res.redirect("/admin/articulos");
+        title: titulo,
+        content: contenido,
+        author: autor,
+        image: image,
+        user: {
+          id: fields.autor,
+        },
+      };
+      const error = {
+        msg: "Error al editar. Los campos título y contenido no pueden estar vacíos",
+      };
+      const users = await User.findAll();
+      res.render("adminEditar", { articulo, users, error });
+    } else {
+      const articulo = {
+        title: fields.titulo,
+        content: fields.contenido,
+        userId: fields.autor,
+        image: path.basename(files.image.path),
+      };
+      const response = await Article.update(articulo, {
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.redirect("/admin/articulos");
+    }
   });
 
   // const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
