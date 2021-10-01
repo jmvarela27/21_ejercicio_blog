@@ -23,7 +23,7 @@
           <!-- Post preview-->
           <% for (const articulo of articulos) { %>
           <div class="post-preview">
-            <a href="<%= articulo.id %> ">
+            <a style="text-decoration: none" href="<%= articulo.id %> ">
               <h2 class="post-title"><%= articulo.title %></h2>
               <h3 class="post-subtitle"><%= articulo.content.substring(0,50) %></h3>
             </a>
@@ -36,11 +36,6 @@
           <!-- Divider-->
           <hr class="my-4" />
           <% } %>
-
-          <!-- Pager-->
-          <div class="d-flex justify-content-end mb-4">
-            <a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-          </div>
         </div>
       </div>
     </div>
