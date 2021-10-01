@@ -8,7 +8,7 @@ module.exports = async () => {
   const articles = [];
   const users = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     users.push({
       firstname: faker.lorem.sentence(1),
       lastname: faker.lorem.sentence(1),
@@ -17,11 +17,12 @@ module.exports = async () => {
   }
   const aux = await User.bulkCreate(users);
 
-  for (let i = 1; i < 11; i++) {
+  for (let i = 0; i < 5; i++) {
     articles.push({
       title: faker.company.catchPhrase(5),
       content: faker.lorem.paragraphs(),
       userId: (i % 5) + 1,
+      image: `image${i + 1}.jpg`,
     });
   }
 

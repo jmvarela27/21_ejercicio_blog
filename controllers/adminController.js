@@ -1,23 +1,42 @@
 const { Article, User } = require("../models");
+const fs = require("fs");
+const path = require("path");
 
 // Display a listing of the resource.
 async function index(req, res) {
   const articulos = await Article.findAll({
-    include: [
-      {
-        model: User,
-        required: true,
-      },
-    ],
+    include: { model: User },
   });
   res.render("adminHome", { articulos });
 }
 
 // Store a newly created resource in storage.
 async function store(req, res) {
-  const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
-  const response = await Article.create(articulo);
-  res.redirect("/admin/articulos");
+  const formidable = require("formidable");
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
+  });
+
+  form.on("file", function (field, file) {
+    fs.rename(file.path, form.uploadDir + "/" + file.name, (e) => {});
+  });
+
+  form.parse(req, async (err, fields, files) => {
+    const articulo = {
+      title: fields.titulo,
+      content: fields.contenido,
+      userId: fields.autor,
+      image: files.image.name,
+    };
+    const response = await Article.create(articulo);
+    res.redirect("/admin/articulos");
+  });
+
+  // const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
+  // const response = await Article.create(articulo);
+  // res.redirect("/admin/articulos");
 }
 
 // Show the form for creating a new resource
@@ -32,12 +51,7 @@ async function edit(req, res) {
   const id = req.params.id;
   const users = await User.findAll();
   const articulo = await Article.findByPk(id, {
-    include: [
-      {
-        model: User,
-        required: true,
-      },
-    ],
+    include: { model: User },
   });
   res.render("adminEditar", { articulo, users });
 }

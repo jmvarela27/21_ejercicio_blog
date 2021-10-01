@@ -38,7 +38,7 @@
         <div class="header">
           <h2>Crear nuevo artículo</h2>
         </div>
-        <form action="/admin/articulos" method="POST">
+        <form action="/admin/articulos" method="POST" enctype="multipart/form-data">
           <div>
             <label for="titulo">Titulo</label>
             <input type="text" id="titulo" name="titulo" placeholder="Ingrese el título..." />
@@ -61,7 +61,10 @@
               <% } %>
             </select>
           </div>
-
+          <!-- <div class="mb-3"> -->
+          <label for="image" class="form-label">Seleccionar una imagen</label>
+          <input id="image" name="image" type="file" class="form-control" />
+          <!-- </div> -->
           <div>
             <button type="submit" class="btn">Guardar</button>
           </div>
