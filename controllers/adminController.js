@@ -14,14 +14,10 @@ async function index(req, res) {
 async function store(req, res) {
   const formidable = require("formidable");
   const form = formidable({
-    multiples: true,
+    multiples: false,
     uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
-
-  // form.on("file", function (field, file) {
-  //   fs.rename(file.path, form.uploadDir + "/" + file.name, (e) => {});
-  // });
 
   form.parse(req, async (err, fields, files) => {
     const articulo = {
@@ -33,10 +29,6 @@ async function store(req, res) {
     const response = await Article.create(articulo);
     res.redirect("/admin/articulos");
   });
-
-  // const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
-  // const response = await Article.create(articulo);
-  // res.redirect("/admin/articulos");
 }
 
 // Show the form for creating a new resource
@@ -58,13 +50,35 @@ async function edit(req, res) {
 
 // Update the specified resource in storage.
 async function update(req, res) {
-  const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
-  const response = await Article.update(articulo, {
-    where: {
-      id: req.params.id,
-    },
+  const formidable = require("formidable");
+  const form = formidable({
+    multiples: false,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
   });
-  res.redirect("/admin/articulos");
+
+  form.parse(req, async (err, fields, files) => {
+    const articulo = {
+      title: fields.titulo,
+      content: fields.contenido,
+      userId: fields.autor,
+      image: path.basename(files.image.path),
+    };
+    const response = await Article.update(articulo, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.redirect("/admin/articulos");
+  });
+
+  // const articulo = { title: req.body.titulo, content: req.body.contenido, userId: req.body.autor };
+  // const response = await Article.update(articulo, {
+  //   where: {
+  //     id: req.params.id,
+  //   },
+  // });
+  // res.redirect("/admin/articulos");
 }
 
 // Remove the specified resource from storage.

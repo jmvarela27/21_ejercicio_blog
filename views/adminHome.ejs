@@ -2,60 +2,78 @@
 <html lang="en">
   <%- include("partials/meta") %>
   <body>
-    <div id="contenido-sin-modal">
-      <div class="content">
-        <div class="header">
-          <h1>Listado de Artículos</h1>
-          <a href="/admin/articulos/crear" class="btn btn-nuevo">Nuevo</a>
-        </div>
-        <div class="table">
-          <table>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>Título</th>
-                <th>Contenido</th>
-                <th>Fecha de creación</th>
-                <th>Autor</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (const articulo of articulos) { %>
-              <tr>
-                <td><%= articulo.id %></td>
-                <td><%= articulo.title %></td>
-                <td><%= articulo.content %></td>
-                <td><%= articulo.createdAt.toDateString() %></td>
-                <td><%= articulo.user.firstname + " " + articulo.user.lastname %></td>
-                <td class="td-acciones">
-                  <a href="/admin/articulos/editar/<%= articulo.id %>" class="btn btn-editar"
-                    >Editar</a
-                  >
-                  <button
-                    type="submit"
-                    id="btn-eliminar"
-                    class="btn-eliminar btn"
-                    onclick="clickEliminar('<%= articulo.id %>')"
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-              <% } %>
-            </tbody>
-          </table>
+    <div class="container">
+      <div class="d-flex justify-content-between mt-5">
+        <h1>Listado de Artículos</h1>
+        <a href="/admin/articulos/crear" class="btn btn-success">Nuevo</a>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Título</th>
+            <th scope="col">Contenido</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const articulo of articulos) { %>
+          <tr>
+            <td scope="row"><%= articulo.id %></td>
+            <td><%= articulo.title %></td>
+            <td><%= articulo.content %></td>
+            <td><%= articulo.createdAt.toDateString() %></td>
+            <td><%= articulo.user.firstname + " " + articulo.user.lastname %></td>
+            <td>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/admin/articulos/editar/<%= articulo.id %>" class="btn btn-primary btn-sm"
+                  >Editar</a
+                >
+                <button
+                  type="submit"
+                  id="btn-eliminar"
+                  class="btn btn-danger btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal"
+                  onclick="clickEliminar('<%= articulo.id %>')"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal" id="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="modal-msg"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <a href="" id="aceptar-modal" class="btn btn-danger">Eliminar</a>
+          </div>
         </div>
       </div>
     </div>
-
-    <div id="dark-background"></div>
-    <div id="modal-box">
-      <p id="modal-msg"></p>
-      <button id="cancelar-modal" class="btn">Cancelar</button>
-      <a href="" id="aceptar-modal" class="btn">Eliminar</a>
-    </div>
-
     <%- include("partials/footer") %>
   </body>
 </html>
