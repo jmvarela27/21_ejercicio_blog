@@ -3,9 +3,8 @@ const { Article, User, Comment } = require("../models");
 
 async function showHome(req, res) {
   const articulos = await Article.findAll({
-    include: {
-      model: User,
-    },
+    include: { model: User },
+    order: [["createdAt", "DESC"]],
   });
   res.render("home", { articulos });
 }
@@ -25,10 +24,6 @@ async function showOne(req, res) {
 }
 
 async function apiCreation(req, res) {
-  // const [results, metadata] = await sequelize.query(
-  //   "SELECT articles.id, articles.title, articles.content, users.firstname as authorFirstname, users.lastname as authorLastname FROM articles LEFT JOIN users ON articles.userId = users.id",
-  // );
-
   const articulos = await Article.findAll({
     include: {
       model: User,

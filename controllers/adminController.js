@@ -6,6 +6,7 @@ const path = require("path");
 async function index(req, res) {
   const articulos = await Article.findAll({
     include: { model: User },
+    order: [["createdAt", "DESC"]],
   });
   res.render("adminHome", { articulos });
 }
