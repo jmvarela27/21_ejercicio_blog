@@ -37,6 +37,16 @@ async function apiCreation(req, res) {
   res.json(articulos);
 }
 
+async function storeComment(req, res) {
+  const comment = await Comment.create({
+    content: req.body.comment,
+    authorName: req.body.authorName,
+    articleId: req.params.id,
+  });
+  console.log(req.body.id);
+  res.redirect("/" + req.params.id);
+}
+
 // async function showContact(req, res) {
 //   res.render("contact");
 // }
@@ -51,6 +61,7 @@ async function apiCreation(req, res) {
 module.exports = {
   showHome,
   showOne,
+  storeComment,
   apiCreation,
   // showContact,
   // showAboutUs,

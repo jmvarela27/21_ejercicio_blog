@@ -72,6 +72,31 @@
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
           <h4 class="mt-5">Comentarios</h4>
+          <form action="/comentario/<%= articulo.id %>" method="POST">
+            <div class="mb-3">
+              <label for="authorName" class="form-label">Nombre</label>
+              <input
+                class="form-control"
+                id="authorName"
+                name="authorName"
+                type="text"
+                placeholder="Ingrese nombre y apellido..."
+              />
+            </div>
+            <div class="mb-3">
+              <label for="comment" class="form-label">Nuevo comentario</label>
+
+              <textarea
+                class="form-control"
+                name="comment"
+                id="comment"
+                rows="10"
+                aria-describedby="comment"
+                placeholder="Ingrese su comentario..."
+              ></textarea>
+            </div>
+            <button class="btn btn-primary">Enviar</button>
+          </form>
           <hr />
 
           <% for (const comment of comments) {%>

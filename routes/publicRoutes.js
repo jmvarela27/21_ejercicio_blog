@@ -8,6 +8,8 @@ publicRouter.get("/", pagesController.showHome);
 
 publicRouter.get("/:id", pagesController.showOne);
 
+publicRouter.post("/comentario/:id", pagesController.storeComment);
+
 publicRouter.get("/api/articulos", pagesController.apiCreation);
 
 module.exports = publicRouter;
