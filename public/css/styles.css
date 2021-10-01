@@ -11584,3 +11584,7 @@ header.masthead .post-heading .meta a {
     font-size: 2.25rem;
   }
 }
+
+.btn {
+  border-radius: 0.25rem;
+}
