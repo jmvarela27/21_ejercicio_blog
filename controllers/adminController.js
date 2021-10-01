@@ -1,5 +1,5 @@
 const { Article, User } = require("../models");
-const fs = require("fs");
+// const fs = require("fs");
 const path = require("path");
 
 // Display a listing of the resource.
@@ -19,16 +19,16 @@ async function store(req, res) {
     keepExtensions: true,
   });
 
-  form.on("file", function (field, file) {
-    fs.rename(file.path, form.uploadDir + "/" + file.name, (e) => {});
-  });
+  // form.on("file", function (field, file) {
+  //   fs.rename(file.path, form.uploadDir + "/" + file.name, (e) => {});
+  // });
 
   form.parse(req, async (err, fields, files) => {
     const articulo = {
       title: fields.titulo,
       content: fields.contenido,
       userId: fields.autor,
-      image: files.image.name,
+      image: path.basename(files.image.path),
     };
     const response = await Article.create(articulo);
     res.redirect("/admin/articulos");
