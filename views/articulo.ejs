@@ -48,7 +48,9 @@
               <h1><%= articulo.title %></h1>
               <span class="subheading"
                 >Posted by
-                <a href="#!"><%= articulo.user.firstname + " " + articulo.user.lastname %> </a>
+                <a style="color: white" href="#!"
+                  ><%= articulo.user.firstname + " " + articulo.user.lastname %>
+                </a>
                 <%= articulo.createdAt.toDateString() %></span
               >
             </div>
