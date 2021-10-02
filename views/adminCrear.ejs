@@ -52,6 +52,7 @@
             name="titulo"
             placeholder="Ingrese el título..."
             value="<%= error.title %>"
+            required
           />
         </div>
         <div class="mb-3">
@@ -63,14 +64,15 @@
             rows="10"
             aria-describedby="content"
             placeholder="Ingrese contenido..."
+            required
           >
 <%= error.content %></textarea
           >
         </div>
         <div class="mb-3">
           <label for="autor" class="form-label">Autor</label>
-          <select class="form-select" name="autor" id="autor" aria-describedby="author">
-            <option selected>Elegir autor...</option>
+          <select class="form-select" name="autor" id="autor" aria-describedby="author" required>
+            <option selected value="">Elegir autor...</option>
             <% for(const user of users) { %>
             <option value="<%= user.id %>"><%= user.firstname + " " + user.lastname %></option>
             <% } %>

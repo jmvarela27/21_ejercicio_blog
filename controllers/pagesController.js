@@ -10,6 +10,8 @@ async function showHome(req, res) {
 }
 
 async function showOne(req, res) {
+  if (isNaN(req.params.id)) return res.status(400).send("Esta página no es válida");
+
   const articulo = await Article.findByPk(req.params.id, {
     include: {
       model: User,
@@ -54,7 +56,7 @@ async function storeComment(req, res) {
       authorName: authorName,
       articleId: req.params.id,
     });
-    res.redirect("/" + req.params.id);
+    res.redirect(`/${req.params.id}#comment${response.id}`);
   }
 }
 

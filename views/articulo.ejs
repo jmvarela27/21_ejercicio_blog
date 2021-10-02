@@ -106,9 +106,12 @@
           <hr />
 
           <% for (const comment of comments) {%>
-          <p>Autor: <em><%= comment.authorName %></em></p>
-          <p class="text-secondary"><%= comment.content %></p>
+          <div id="comment<%= comment.id %>">
+            <p>Autor: <em><%= comment.authorName %></em></p>
+            <p class="text-secondary"><%= comment.content %></p>
+          </div>
           <hr />
+
           <% } %>
         </div>
       </div>

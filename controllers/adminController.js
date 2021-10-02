@@ -126,6 +126,7 @@ async function destroy(req, res) {
     if (err) throw err;
     console.log("Se borró el archivo " + articulo.image);
   });
+
   const response = await Article.destroy({
     where: {
       id: req.params.id,

@@ -54,6 +54,7 @@
             aria-describedby="title"
             name="titulo"
             value="<%= articulo.title %>"
+            required
           />
         </div>
         <div class="mb-3">
@@ -64,13 +65,15 @@
             id="contenido"
             rows="10"
             aria-describedby="content"
+            required
           >
 <%= articulo.content %></textarea
           >
         </div>
         <div class="mb-3">
           <label for="autor" class="form-label">Autor</label>
-          <select class="form-select" name="autor" id="autor" aria-describedby="author">
+          <select class="form-select" name="autor" id="autor" aria-describedby="author" required>
+            <option value="">Elige un autor...</option>
             <% for(const user of users) { %> <% if(articulo.user.id === user.id) {%>
             <option selected value="<%= user.id %> ">
               <%= user.firstname + " " + user.lastname %>
