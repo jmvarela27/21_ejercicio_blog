@@ -120,6 +120,12 @@ async function update(req, res) {
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
+  const { unlink } = require("fs");
+  const articulo = await Article.findByPk(req.params.id);
+  unlink(__dirname + "/../public/img/" + articulo.image, (err) => {
+    if (err) throw err;
+    console.log("Se borró el archivo " + articulo.image);
+  });
   const response = await Article.destroy({
     where: {
       id: req.params.id,
