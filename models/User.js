@@ -1,5 +1,10 @@
-module.exports = (sequelize, Model, DataTypes) => {
-  class User extends Model {}
+const bcrypt = require("bcryptjs")
+odule.exports = (sequelize, Model, DataTypes) => {
+  class User extends Model {
+    validatePassword(password){
+      return match = bcrypt.compare(password, this.password)
+    }
+  }
 
   User.init(
     {
@@ -20,6 +25,7 @@ module.exports = (sequelize, Model, DataTypes) => {
       password: {
         type: DataTypes.STRING,
       },
+      
     },
     {
       sequelize,
