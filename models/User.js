@@ -1,11 +1,8 @@
 const bcrypt = require("bcryptjs");
 module.exports = (sequelize, Model, DataTypes) => {
   class User extends Model {
-    validatePassword(password) {
-      return bcrypt.compare(password, this.password);
-    }
-    static encryptPassword(password) {
-      return bcrypt.hash(password, 10);
+    async validatePassword(password) {
+      return await bcrypt.compare(password, this.password);
     }
   }
 
@@ -34,6 +31,8 @@ module.exports = (sequelize, Model, DataTypes) => {
       modelName: "user",
     },
   );
-
+  User.beforeCreate(async (user) => {
+    user.password = await bcrypt.hash(user.password, 10);
+  });
   return User;
 };
