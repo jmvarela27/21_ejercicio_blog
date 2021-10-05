@@ -4,7 +4,6 @@ const adminController = require("../controllers/adminController");
 
 // Rutas del Admin:
 // ...
-
 adminRouter.get("/articulos", adminController.index);
 
 adminRouter.get("/articulos/crear", adminController.create);

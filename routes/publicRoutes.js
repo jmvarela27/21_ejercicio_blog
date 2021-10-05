@@ -2,18 +2,19 @@ const express = require("express");
 const publicRouter = express.Router();
 const pagesController = require("../controllers/pagesController");
 const userController = require("../controllers/userController");
+const authController = require("../controllers/authController")
 
 // Rutas del Públicas:
 // ...
 publicRouter.get("/", pagesController.showHome);
 
-publicRouter.get("/registro", userController.create);
+publicRouter.get("/registro", authController.create);
 
-publicRouter.post("/registro", userController.store);
+publicRouter.post("/registro", authController.store);
 
-publicRouter.get("/login", userController.showLogin);
+publicRouter.get("/login", authController.show);
 
-publicRouter.post("/login", userController.store);
+publicRouter.post("/login", authController.login);
 
 publicRouter.get("/:id", pagesController.showOne);
 

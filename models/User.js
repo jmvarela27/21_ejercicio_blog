@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
 module.exports = (sequelize, Model, DataTypes) => {
   class User extends Model {
-    // validatePassword(password) {
-    //   return (match = bcrypt.compare(password, this.password));
-    // }
-    // static encryptPassword(password) {
-    //   return bcrypt.hash(password, 10);
-    // }
+    validatePassword(password) {
+      return bcrypt.compare(password, this.password);
+    }
+    static encryptPassword(password) {
+      return bcrypt.hash(password, 10);
+    }
   }
 
   User.init(
