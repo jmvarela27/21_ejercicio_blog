@@ -30,12 +30,26 @@ passport.use(
   ) {
     const user = await User.findOne({ where: { email } });
     if (user === null) {
-      return done(null,false,{message:"Incorrect credentials."})
-    } else if(!user.validatePassword(password,bcrypt)) {
-      return done(null,false,{message:"Incorrect credentials."})
+      return done(null, false, { message: "Incorrect credentials." });
+    } else if (!user.validatePassword(password, bcrypt)) {
+      return done(null, false, { message: "Incorrect credentials." });
     }
   }),
 );
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser( async function (id, done) {
+  const user = await User.findByPk(id)
+    .then((user) => {
+      done(null, user); // Usuario queda disponible en req.user.
+    })
+    .catch((error) => {
+      done(error, user);
+    });
+});
 
 app.use(express.static("public"));
 
