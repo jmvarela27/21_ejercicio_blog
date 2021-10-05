@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
-odule.exports = (sequelize, Model, DataTypes) => {
+module.exports = (sequelize, Model, DataTypes) => {
   class User extends Model {
-    validatePassword(password){
-      return match = await bcrypt.compare(password, this.password)
-    }
-    static encryptPassword(password){
-      return await bcrypt.hash(password,10);
-    }
+    // validatePassword(password) {
+    //   return (match = bcrypt.compare(password, this.password));
+    // }
+    // static encryptPassword(password) {
+    //   return bcrypt.hash(password, 10);
+    // }
   }
 
   User.init(
@@ -28,7 +28,6 @@ odule.exports = (sequelize, Model, DataTypes) => {
       password: {
         type: DataTypes.STRING,
       },
-      
     },
     {
       sequelize,
